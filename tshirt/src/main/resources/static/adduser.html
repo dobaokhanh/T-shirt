@@ -1,0 +1,32 @@
+<div> Add a customer </div>
+
+<br>
+<label for = "userName">Name</label><br> <input type = "text" id = "userName" ><br>
+<label for = "email">Email</label><br> <input type = "text" id = "email" > <br>
+<label for = "mobile">Mobile</label><br> <input type = "text" id = "mobile" > <br>
+<label for = "address">Address </label> <br> <input type = "text" id = "address"> <br>
+<button onclick="save()"> Save customer to database</button>
+<script>
+    function save(){
+        var user ={};
+        user.userName = document.getElementById("userName").value;
+        user.email = document.getElementById("email").value;
+        user.mobile = document.getElementById("mobile").value;
+        user.address = document.getElementById("address").value;
+        console.log(user);
+
+        // POSTING customer json RESTful API
+    //you should have json ready
+    fetch('user', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res=>res.json())
+    .then(res => console.log(res));
+    }
+
+</script>
